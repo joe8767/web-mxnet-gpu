@@ -1,8 +1,9 @@
-### To run a nginx+uwsgi+flask+mxnet web server, just run command:
-#nginx
-#uwsgi test.ini
+#nginx+uwsgi+flask+mxnet web server
+## To run a nginx+uwsgi+flask+mxnet web server, just run command:
+###nginx
+###uwsgi test.ini
 or
-#uwsgi runserver.ini
+###uwsgi runserver.ini
 Be sure of your Flask project was correct configured as the requirements in this document.
 
 
@@ -20,17 +21,17 @@ and make sure that your entry py file is named to ”main.py"
 and the app object is named to "app" 
 
 
-### Explanation of testserver.ini
-# uwsgi socket ip
+## Explanation of testserver.ini
+### uwsgi socket ip
 socket = 127.0.0.1:3031
-# Your Flask app location
+### Your Flask app location
 chdir=./WebApp/
-# Your Flask app filename
+### Your Flask app filename
 wsgi-file=Example.py
-# Your Flask app Object name (such as "app = Flask(__name__)")
+### Your Flask app Object name (such as "app = Flask(__name__)")
 callable=app
 
-### Run command:
+## Run command:
 sudo docker run -it -v /home/joe/:/homeOfJoe -p 8080:80 -p 8888:8888 --device /dev/nvidiactl --device /dev/nvidia-uvm --device /dev/nvidia0 --name="mxweb" joe8767/mxnet-cuda-web
 
 uwsgi --socket 127.0.0.1:3031 --chdir ./WebApp/ --wsgi-file Example.py --master --processes 4 --threads 2 --stats 127.0.0.1:9191
