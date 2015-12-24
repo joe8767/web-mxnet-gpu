@@ -1,0 +1,48 @@
+Sending build context to Docker daemon  21.5 kB
+Step 1 : FROM ubuntu:14.04
+ ---> 0a17decee413
+Step 2 : MAINTAINER Machine Intellegence Lab SCU "http://www.machineilab.com"
+ ---> Using cache
+ ---> 9fdf2a2fb8e5
+Step 3 : RUN apt-get update
+ ---> Using cache
+ ---> 05202600f401
+Step 4 : RUN apt-get install -y build-essential
+ ---> Using cache
+ ---> b689be6fbe02
+Step 5 : RUN apt-get install -y python python-dev python-setuptools
+ ---> Using cache
+ ---> cc88a5aff411
+Step 6 : RUN apt-get install -y nginx
+ ---> Using cache
+ ---> 561e98ca5b77
+Step 7 : RUN apt-get install -y python-pip
+ ---> Using cache
+ ---> 4dc3fc7f44d2
+Step 8 : RUN pip install uwsgi
+ ---> Using cache
+ ---> bb0095f9aec4
+Step 9 : RUN pip install Flask
+ ---> Using cache
+ ---> 500726af4f8b
+Step 10 : RUN rm /etc/nginx/nginx.conf
+ ---> Running in fdad6c1616a9
+ ---> 77e5ae675a68
+Removing intermediate container fdad6c1616a9
+Step 11 : ADD Example/nginx.conf /etc/nginx/
+ ---> e75109072b16
+Removing intermediate container 2f31c627a9d5
+Step 12 : RUN mkdir ~/example
+ ---> Running in c13741a6601f
+ ---> cddd414819c1
+Removing intermediate container c13741a6601f
+Step 13 : ADD Example/runserver.ini ~/example
+ ---> 29cbe717bafb
+Removing intermediate container 1c71b56f9f5e
+Step 14 : RUN mkdir ~/example/WebApp
+ ---> Running in d48103a11802
+ ---> c665051821ee
+Removing intermediate container d48103a11802
+Step 15 : ADD Example/WebApp/Example.py ~/example/WebApp/
+lstat /var/lib/docker/aufs/mnt/2c46e27d4efdef04f559f8a0a96cd522e9ccd0c7d521717886e3c782215bea61/~/example/WebApp: not a directory
+

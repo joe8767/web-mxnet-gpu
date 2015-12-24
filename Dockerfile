@@ -2,7 +2,7 @@
 FROM kaixhin/cuda-mxnet
 MAINTAINER Machine Intellegence Lab at SCU "http://www.machineilab.org"
 
-#### install web components begin
+#### install web components begin ####
 
 RUN apt-get update
 
@@ -10,44 +10,57 @@ RUN apt-get install -y build-essential
 
 RUN apt-get install -y python python-dev python-setuptools
 
-# install nginx
+#### install nginx ####
 RUN apt-get install -y nginx
 
 RUN apt-get install -y python-pip
 
-# install uwsgi
+#### install uwsgi ####
 RUN pip install uwsgi
 
 RUN pip install Flask
 
-# Add nginx conf 
+#### Add nginx conf  ####
 RUN rm /etc/nginx/nginx.conf
 ADD Example/nginx.conf /etc/nginx/
 
-# Add uwsgi ini  testserver.ini runserver.ini
-RUN mkdir ~/example
-ADD Example/testserver.ini ~/example/
-ADD Example/runserver.ini ~/example/
+#### Add uwsgi ini  testserver.ini runserver.ini ####
+RUN mkdir /root/example
+ADD Example/test.ini /root/example/
+ADD Example/runserver.ini /root/example/
 
-# Add example Example.py
-RUN mkdir ~/example/WebApp
-ADD Example/WebApp/Example.py ~/example/WebApp/
+#### Add example Example.py ####
+RUN mkdir /root/example/WebApp
+ADD Example/WebApp/Example.py /root/example/WebApp/
 
-# Add readme
-ADD Example/Readme ~/example/ 
+#### Add readme ####
+ADD Example/Readme /root/example/ 
 
-WORKDIR ~/example/
 
-#### install web components end
 
-#### install jupyter begin
+#### install web components end ####
+
+#### install jupyter begin ####
 
 RUN pip install ipython
 
 RUN pip install notebook
 
-#### install jupyter end
+#### install jupyter end ####
 
-# CMD ["nginx"]
+#### install Runtime Dependencies begin ####
 
+RUN pip install scipy
+
+RUN pip install scikit-image
+
+#### install Runtime Dependencies end ####
+
+#### set work dir
+WORKDIR /root/example/
+
+#### web port ####
 EXPOSE 80
+
+#### jupyter port ####
+EXPOSE 8888
